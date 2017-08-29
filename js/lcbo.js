@@ -57,7 +57,45 @@ const LCBO = {
     });
   },
 
+  selectedStore: null,
   chooseStore: function(store){
-    console.log(store);
-  }
+    this.selectedStore = store;
+    console.log('selected store:', store);
+  },
+
+  searchForProducts: function(query){
+    const params = {
+      q: query,
+      // store_id: this.selectedStore.id,
+      order: 'price_in_cents.desc',
+    };
+
+    if (this.selectedStore) {
+      params.store_id = this.selectedStore.id
+    }
+
+    $.ajax({
+      beforeSend: function(jqXhr){
+        jqXhr.setRequestHeader("Authorization", "Token "+LCBO.apiKey);
+      },
+      url: LCBO.endpoints.products(params),
+      method: 'get',
+    }).then(function(data){
+
+      const $productsContainer = $("#products");
+      const products = data.result;
+      const template = String($("#product_template").html());
+
+      products.forEach(function(product){
+        let html = template
+          .replace(/{{productName}}/g, product.name)
+          .replace(/{{productImage}}/g, product.image_thumb_url)
+          .replace(/{{productDescription}}/g, product.description || product.tags)
+          .replace(/{{productPrice}}/g, parseFloat(product.price_in_cents / 100).toFixed(2));
+        $productsContainer.append( $(html) );
+      });
+
+      $productsContainer.removeClass('hidden');
+    });
+  },
 };

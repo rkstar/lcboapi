@@ -1,6 +1,10 @@
+<!doctype html>
 <html>
 <head>
   <title>lcbo api demo</title>
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
   <link rel="stylesheet" href="css/reset.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/main.css" />
@@ -13,10 +17,19 @@
 
   <div id="map"></div>
 
-  <script type="text/template">
+  <div id="products" class="products hidden"></div>
 
-
+  <script id="product_template" type="text/template">
+    <article class="product-data">
+      <img src="{{productImage}}" alt="{{productDescription}}">
+      <section>
+        <h1 class="product-name">{{productName}}</h1>
+        <p>{{productDescription}}</p>
+        <p>${{productPrice}}</p>
+      </section>
+    </article>
   </script>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
   <script src="js/red.js"></script>
@@ -28,6 +41,6 @@
       Maps.initMap();
     }
   </script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlgmbLl1eYmWWE_RGf73wUthaNglNWWkY&callback=init" async defer></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQim_BuQXu5WX-WazQhxq444Duma07CbE&callback=init" async defer></script>
 </body>
 </html>

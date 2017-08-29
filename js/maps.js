@@ -1,6 +1,6 @@
 const Maps = {
   ready: false,
-  apiKey: 'AIzaSyBlgmbLl1eYmWWE_RGf73wUthaNglNWWkY',
+  apiKey: 'AIzaSyDQim_BuQXu5WX-WazQhxq444Duma07CbE',
   map: null,
 
   initMap: function(){
